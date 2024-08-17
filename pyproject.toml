@@ -1,0 +1,69 @@
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+loguru = "^0.7.2"
+pydantic = "^2.7.2"
+ezconfig = {version = "0.0.6", source = "gitlab-ezconfig"}
+sqlalchemy = {version = "^2.0.30", extras = ["asyncio"]}
+aiohttp = "^3.9.5"
+asyncpg = "^0.29.0"
+apscheduler = "^3.10.4"
+aiosmtplib = "^3.0.1"
+ldap3 = "^2.9.1"
+pymssql = "^2.3.0"
+jinja2 = "^3.1.4"
+prometheus-client = "^0.20.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.1"
+pytest-mock = "^3.14.0"
+pytest-asyncio = "^0.23.7"
+ruff = "^0.4.6"
+pre-commit = "^3.7.1"
+pyright = "^1.1.365"
+
+[[tool.poetry.source]]
+name = "gitlab-ezconfig"
+url = "https://gitlab.ru/.../pypi/simple"
+priority = "supplemental"
+
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "E501",  # Line too long
+
+  "D",  # pydocstyle
+  "S",  # flake8-bandit
+  "W",  # pycodestyle warnings (покрываются форматированием)
+  "EM", "TRY003",  # Передача строк в конструктор исключений
+  "TD", "FIX",  # flake8-todos, flake8-fixme
+  "TCH",  # flake8-type-checking
+  "ANN101", "ANN102",  # Missing type annotation for `self/cls`
+  "ANN401",  # Dynamically typed expressions (typing.Any) are disallowed
+  "RUF001", "RUF002", "RUF003",  # ambiguous character warnings (Не работают с кириллицей)
+  "COM812", "ISC001",  # following rules may cause conflicts when used with the formatter
+  "PGH003",  # Use specific rule codes when ignoring type issues
+  "BLE001",  # Do not catch blind exception: `Exception`
+  "ERA",  # Found commented-out code
+]
+
+
+
+[tool.pyright]
+include = ["src", "tests", "scripts"]
+exclude = ["**/__pycache__"]
+venvPath = "."
+venv = ".venv"
+
+reportUnnecessaryTypeIgnoreComment = true

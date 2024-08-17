@@ -1,0 +1,38 @@
+# Подключение и настройки Центра Уведомлений (отправка уведомлений в порталы)
+notification_api_base_url: http://127.0.0.1
+application_id: "@vault_str mount/data/path,application_id"
+portal_application_ids: "@vault_yaml mount/data/path,portal_application_ids.yaml"
+enabled_portal_applications: ["application1"]
+
+# Настройки для внешней БД
+externaldb_database: dbname
+externaldb_secrets: "@vault_yaml mount/data/path,secrets.yaml"
+externaldb_group_names_to_include:
+  - Group 1
+  - Group 2
+externaldb_group_names_to_exclude: []
+
+# Доступ к Active Directory
+active_directory: "@vault_yaml mount/data/path,active_directory.yaml"
+search_base: "OU=Users,DC=example,DC=ru"
+
+# Настройки SMTP для отправки уведомлений по почте
+smtp_secrets: "@vault_yaml mount/data/path,smtp.yaml"
+
+
+# Собственная БД приложения
+db_database: password_reminder
+db_secrets: "@vault_yaml mount/data/path,db_secrets.yaml"
+
+# Расписания
+schedule_main: "0 9 * * *"
+
+# За сколько дней уведомлять пользователя
+notify_at_days_to_expiry: [1, 2, 3, 7, 14, 30]
+
+# Флаги для дебага
+debug:
+  run_immediately: false
+  enable_sqlalchemy_logs: false
+  email_disabled: false
+  portal_notification_disabled: false

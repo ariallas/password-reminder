@@ -1,0 +1,18 @@
+stack_name:  password-reminder-{{ env_name }}
+image_name:  gitlab.ru:5050/password-reminder:{{ env_values.version }}
+workdir:     /home/{{ ansible_user }}/password-reminder-{{ env_name }}
+
+vault_path_secrets_v2:
+  - path: tokens/data/password_reminder,token
+    key: vault_token
+    format: string
+  - path: services/data/password_reminder,vats_gitlab_token.yaml
+    key: vats
+
+prod:
+  version: 0.2.7
+  env:
+    EZCONFIG_ENVIRONMENT: prod
+    # DEBUG__ENABLE_SQLALCHEMY_LOGS: "True"
+    # DEBUG__EMAIL_DISABLED: "True"
+    # DEBUG__PORTAL_NOTIFICATION_DISABLED: "True"

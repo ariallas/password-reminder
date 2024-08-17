@@ -1,0 +1,24 @@
+#jinja2: lstrip_blocks: True
+
+version: '3.8'
+
+services:
+  service:
+    image: "{{ image_name }}"
+    environment:
+      TZ: Europe/Moscow
+      LOGURU_COLORIZE: "true"
+      EZCONFIG_VAULT_TOKEN: {{ secrets.vault_token }}
+
+      {% for env_name, env_value in env_values.env.items() %}
+      {{ env_name }}: "{{ env_value }}"
+      {% endfor %}
+    ports:
+      - 30000:8000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "500m"
+        max-file: "2"
+    labels:
+      orv.log.parser: python

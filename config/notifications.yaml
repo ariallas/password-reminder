@@ -1,0 +1,18 @@
+smtp_sender_name: "Истечение срока действия пароля"
+
+email_subject: "Истечение срока действия пароля {{ user.ad_login }}: {{ user.ad_pwd_expires_in_days }} дней"
+email_content_html: | # Используется и для почты, и для порталов
+  <html>
+  <body>
+    <h1>Уважаемый Пользователь!</h1>
+    <p>Срок действия вашей учётной записи {{ user.ad_login }} истекает через {{ user.ad_pwd_expires_in_days }} дней!</p>
+    <p>Просим Вас сменить пароль.</p>
+  </body>
+  </html>
+email_content_plain: |
+  Уважаемый Пользователь!
+  Срок действия вашей учётной записи {{ user.ad_login }} истекает через {{ user.ad_pwd_expires_in_days }} дней!
+  Просим Вас сменить пароль.
+portal_title: "Истечение срока действия пароля"
+portal_summary: |
+  Срок действия вашей учётной записи {{ user.ad_login }} истекает через {{ user.ad_pwd_expires_in_days }} дней!

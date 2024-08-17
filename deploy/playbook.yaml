@@ -1,0 +1,13 @@
+- name: Deploy service via va.vats.generic_deploy role
+  hosts: all
+  gather_facts: false
+  vars_files:
+    - ../values.yaml
+  vars:
+    env_values: "{{ vars[env_name] }}"
+  roles:
+    - role: va.vats.init
+
+    - role: va.vats.generic_deploy
+      local_build: true
+      compose_template_path: docker-compose.j2.yaml

@@ -1,0 +1,6 @@
+all:
+  hosts:
+    some-hostname:
+  vars:
+    env_name: prod
+    vault_path_inventory: vms/data/some-hostname,inventory_secrets.yaml
